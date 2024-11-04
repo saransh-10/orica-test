@@ -9,7 +9,7 @@ locals {
 
   subnet_host_name      = lower("${var.org_name}-${var.bu_name}-host-snet-02")
   subnet_container_name = lower("${var.org_name}-${var.bu_name}-container-snet-02")
-  subnet_pep_name       = lower("${var.org_name}-${var.bu_name}-snet-pep-01")
+  subnet_pep_name       = lower("${var.org_name}-${var.bu_name}-snet-pep-02")
   subnet_compute_name   = lower("${var.org_name}-${var.bu_name}-snet-compute-01")
 
   Virtual_Network_Link_Name = "ICT_Platform_Hub_VNET_Link"
