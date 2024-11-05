@@ -13,8 +13,10 @@ on:
           - prod
       tfvars:
        required: true
+       type: string
       workload:
        required: true
+       type: string
       branch:
         description: 'Branch to deploy from'
         required: true
