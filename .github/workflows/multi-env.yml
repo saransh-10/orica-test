@@ -42,7 +42,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform/Workload/${{ inputs.Workload }}
+        working-directory: ./Workload/${{ inputs.Workload }}
 
       - name: Terraform Plan
         run: terraform plan -out=terraform.tfplan -var-file=./Deployment/${{ inputs.environment }}/${{ inputs.tfvars }}
