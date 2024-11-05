@@ -2,15 +2,15 @@ locals {
   resource_group_name = data.azurerm_resource_group.resource_group.name
   location            = data.azurerm_resource_group.resource_group.location
 
-  networking_rg_name   = lower("${var.org_name}-${var.bu_name}-net-rg-01")
-  virtual_network_name = lower("${var.org_name}-${var.bu_name}-vnet-01")
+  networking_rg_name   = lower("${var.org_name}-${var.bu_name}-net-rg-02")
+  virtual_network_name = lower("${var.org_name}-${var.bu_name}-vnet-02")
   address_space_vnet   = var.address_space_vnet
 
 
   subnet_host_name      = lower("${var.org_name}-${var.bu_name}-host-snet-02")
   subnet_container_name = lower("${var.org_name}-${var.bu_name}-container-snet-02")
   subnet_pep_name       = lower("${var.org_name}-${var.bu_name}-snet-pep-02")
-  subnet_compute_name   = lower("${var.org_name}-${var.bu_name}-snet-compute-01")
+  subnet_compute_name   = lower("${var.org_name}-${var.bu_name}-snet-compute-02")
 
   Virtual_Network_Link_Name = "ICT_Platform_Hub_VNET_Link"
 
