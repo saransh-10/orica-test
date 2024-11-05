@@ -2,7 +2,7 @@ locals {
   resource_group_name = data.azurerm_resource_group.resource_group.name
   location            = data.azurerm_resource_group.resource_group.location
 
-  networking_rg_name   = lower("${var.org_name}-${var.bu_name}-net-rg-01")
+  networking_rg_name   = lower("${var.org_name}-${var.bu_name}-net-rg-02")
   virtual_network_name = lower("${var.org_name}-${var.bu_name}-vnet-02")
   address_space_vnet   = var.address_space_vnet
 
