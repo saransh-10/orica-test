@@ -1,0 +1,54 @@
+name: Terraform CI/CD Pipeline
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - uat
+          - prod
+      tfvars:
+       required: true
+      workload:
+       required: true
+      branch:
+        description: 'Branch to deploy from'
+        required: true
+        default: 'master'
+jobs:  
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.8.5
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./terraform/Workload/${{ inputs.Workload }}
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.Azure_Credential }}
+
+      - name: Terraform Plan
+        run: terraform plan -out=terraform.tfplan -var-file=./Deployment/${{ inputs.environment }}/${{ inputs.tfvars }}
+        working-directory: ./Workload/${{ inputs.environment }}
+
+      - name: Upload Terraform Plan
+        id: upload_plan
+        uses: actions/upload-artifact@v3
+        with:
+          name: tfplan
+          path: ./Workload/${{ inputs.environment }}/${{ inputs.Workload }}
