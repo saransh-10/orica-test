@@ -11,4 +11,15 @@ variable "metastore_region" {
   description = "(Mandatory for account-level) The region of the metastore"
 }
 
+variable "adls_name" {
+  type        = string
+  description = "(Mandatory for account-level) The region of the metastore"
+}
+
+variable "acc_name" {
+  type        = string
+  description = "(Mandatory for account-level) The region of the metastore"
+}
+
+
 

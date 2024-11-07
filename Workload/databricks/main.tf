@@ -66,7 +66,7 @@ module "adlsGen2DfsPEP" {
   peSubnetId                   = data.azurerm_subnet.peSubnet.id
   peNicName                    = "${var.org_name}-${var.bu_name}-dls2-dfs-pe1-nic"
   serviceConnectionName        = "${var.org_name}-${var.bu_name}-dls2-dfs-pe1"
-  privateResourceId            = local.storage_resource_id
+  privateResourceId            = data.azurerm_storage_account.adls_gen2.id
   subresourceNames             = local.TargetSubresource.adlsGen2DfsPeSubresourceNames
   dnsZoneGroupName             = "${var.org_name}-${var.bu_name}-dls2-dfs-pe1-dnsgroup"
   privateDnsZoneGroupCondition = true
@@ -85,7 +85,7 @@ module "adlsGen2BlobPEP" {
   peSubnetId                   = data.azurerm_subnet.peSubnet.id
   peNicName                    = "${var.org_name}-${var.bu_name}-dls2-blob-pe1-nic"
   serviceConnectionName        = "${var.org_name}-${var.bu_name}-dls2-blob-pe1"
-  privateResourceId            = local.storage_resource_id
+  privateResourceId            = data.azurerm_storage_account.adls_gen2.id
   subresourceNames             = local.TargetSubresource.adlsGen2BlobPeSubresourceNames
   dnsZoneGroupName             = "${var.org_name}-${var.bu_name}-dls2-blob-pe1-dnsgroup"
   privateDnsZoneGroupCondition = true

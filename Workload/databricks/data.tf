@@ -2,6 +2,11 @@ data "azurerm_resource_group" "RG" {
   name = var.rg_name
 }
 
+data "azurerm_storage_account" "adls_gen2" {
+  resource_group_name = data.azurerm_resource_group.RG.name
+  name                = local.storage_account_name
+}
+
 data "azurerm_virtual_network" "existingVnet" {
   name                = var.existingVnetName
   resource_group_name = data.azurerm_resource_group.RG.name
@@ -38,8 +43,8 @@ data "azurerm_network_security_group" "containerNsg" {
 data "terraform_remote_state" "private_dns_zone" {
   backend = "azurerm"
   config = {
-    resource_group_name  = "orica-transit-net-rg-01"
-    storage_account_name = "oricatransitdls2"
+    resource_group_name  = "Orica-RG"
+    storage_account_name = "oricatest2"
     container_name       = "tfstate"
     key                  = "terraform1.tfstate"
     client_id            = "0e841678-64e3-4abb-8b78-e6b06fb8969f"

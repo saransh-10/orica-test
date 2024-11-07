@@ -29,3 +29,23 @@ variable "metastore_region" {
     error_message = "[metastore_region] must not be empty"
   }
 }
+
+# Variable for the environment name
+variable "environment" {
+  type        = string
+  description = "The name of the environment."
+}
+
+# Environment resource group configurations
+variable "workspaces" {
+  description = "Workspace and Resource group configuration for the environment"
+  type = map(object({
+    id = string
+  }))
+  default = {}
+
+  validation {
+    condition     = length(var.workspaces) >= 0
+    error_message = "[workspaces] must contain at least one resource group configuration"
+  }
+}

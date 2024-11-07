@@ -3,19 +3,20 @@ variable "network_interface_name" {
   type        = string
 }
 
-variable "network_interface_location" {
-  description = "Location of the network interface"
-  type        = string
-}
+# variable "network_interface_location" {
+#   description = "Location of the network interface"
+#   type        = string
+# }
 
-variable "network_interface_resource_group_name" {
-  description = "Name of the resource group containing the network interface"
-  type        = string
-}
+# variable "network_interface_resource_group_name" {
+#   description = "Name of the resource group containing the network interface"
+#   type        = string
+# }
 
 variable "nic_ip_configuration_name" {
   description = "Name of the IP configuration"
   type        = string
+  default = "internal"
 }
 
 variable "nic_subnet_id" {
@@ -26,6 +27,7 @@ variable "nic_subnet_id" {
 variable "nic_private_ip_address_allocation" {
   description = "Method to allocate the private IP address (Dynamic or Static)"
   type        = string
+  default = "Dynamic"
 }
 
 variable "vm_name" {
@@ -65,10 +67,10 @@ variable "admin_password" {
   sensitive   = true
 }
 
-variable "source_image_id" {
-  description = "The ID of the source image to be used for the virtual machine."
-  type        = string
-}
+# variable "source_image_id" {
+#   description = "The ID of the source image to be used for the virtual machine."
+#   type        = string
+# }
 
 variable "vm_public_key" {
   description = "The public SSH key to be used for authentication to the virtual machine."

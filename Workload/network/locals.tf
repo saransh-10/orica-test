@@ -1,8 +1,7 @@
 locals {
-  resource_group_name = data.azurerm_resource_group.resource_group.name
-  location            = data.azurerm_resource_group.resource_group.location
+  resource_group_name = lower("${var.org_name}-${var.bu_name}-net-rg-01")
+  location            = lower("eastus")
 
-  networking_rg_name   = lower("${var.org_name}-${var.bu_name}-net-rg-01")
   virtual_network_name = lower("${var.org_name}-${var.bu_name}-vnet-01")
   address_space_vnet   = var.address_space_vnet
 
@@ -12,25 +11,23 @@ locals {
   subnet_pep_name       = lower("${var.org_name}-${var.bu_name}-snet-pep-01")
   subnet_compute_name   = lower("${var.org_name}-${var.bu_name}-snet-compute-01")
 
-  Virtual_Network_Link_Name = "ICT_Platform_Hub_VNET_Link"
+  Virtual_Network_Link_Name = "Orica_PDZ_VNET_Link"
 
   private_dns_link_registration_enabled = false
-  # rt_name = [lower("${var.org_name}-${var.bu_name}-${var.environment}-${var.location}-rt-01"), lower("${var.org_name}-${var.bu_name}-${var.environment}-${var.location}-rt-02")]
 
-
-  //subnets private endpoint network policy enabled or disabled(enabled in case of subnet stores private endpoints)
+  # subnets private endpoint network policy enabled or disabled(enabled in case of subnet stores private endpoints)
   subnet_private_endpoint_network_policy_false = false
   subnet_private_endpoint_network_policy_true  = true
 
-  //subnet private link service network policies enabled or disabled
+  # subnet private link service network policies enabled or disabled
   private_link_service_network_policies_enabled_true  = true
   private_link_service_network_policies_enabled_false = false
 
-  //disable bgp route propagation
+  # disable bgp route propagation
   disable_bgp_route_propagation = true
   enable_bgp_route_propagation  = false
 
-  // subnet deligations 
+  #  subnet deligations 
   subnet_delegation = {
     subnet_delegation_name  = "databricks-del-public"
     service_delegation_name = "Microsoft.Databricks/workspaces"
@@ -42,14 +39,14 @@ locals {
   }
   subnet_delegation_null = {}
 
-  // service endpoints 
+  #  service endpoints 
   service_endpoints = toset([
     "Microsoft.Storage",
     "Microsoft.AzureActiveDirectory",
     "Microsoft.Sql"
   ])
 
-  // nsg details
+  #  nsg details
   nsg_snet_host_name      = lower("${var.org_name}-${var.bu_name}-nsg-host-01")
   nsg_snet_container_name = lower("${var.org_name}-${var.bu_name}-nsg-container-01")
 

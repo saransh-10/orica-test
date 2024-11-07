@@ -1,8 +1,8 @@
 # Creates a network interface with the specified name, location, and resource group, along with an IP configuration that includes the subnet ID and private IP address allocation method.
 resource "azurerm_network_interface" "vm_nic" {
   name                = var.network_interface_name
-  location            = var.network_interface_location
-  resource_group_name = var.network_interface_resource_group_name
+  location            = var.vm_location
+  resource_group_name = var.vm_resource_group_name
 
   # Defines an IP configuration for the network interface, specifying the configuration name, subnet ID, and method for allocating private IP addresses.
   ip_configuration {
@@ -10,6 +10,7 @@ resource "azurerm_network_interface" "vm_nic" {
     subnet_id                     = var.nic_subnet_id
     private_ip_address_allocation = var.nic_private_ip_address_allocation
   }
+  
 }
 
 # This Terraform block defines an Azure Linux virtual machine with specified parameters.
@@ -20,7 +21,7 @@ resource "azurerm_linux_virtual_machine" "virtual_machine" {
   size                            = var.vm_machine_size
   admin_username                  = var.vm_admin_username
   network_interface_ids           = [azurerm_network_interface.vm_nic.id]
-  source_image_id                 = var.source_image_id
+  # source_image_id                 = var.source_image_id
   computer_name                   = var.vm_admin_username
   admin_password                  = var.admin_ssh_key != null ? null : var.admin_password
   disable_password_authentication = var.admin_ssh_key != null ? true : false
@@ -41,13 +42,10 @@ resource "azurerm_linux_virtual_machine" "virtual_machine" {
   }
 
   # This dynamic block defines the source image reference for the Azure Linux virtual machine, based on provided image parameters if the source image ID is not specified.
-  dynamic "source_image_reference" {
-    for_each = var.source_image_id == null ? [1] : []
-    content {
+  source_image_reference {
       sku       = var.vm_image_reference.sku
       version   = var.vm_image_reference.version
       publisher = var.vm_image_reference.publisher
       offer     = var.vm_image_reference.offer
-    }
   }
 }
