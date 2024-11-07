@@ -41,6 +41,9 @@ jobs:
         with:
           creds: ${{ secrets.Azure_Credential }}
 
+      - name: List tfvars files
+        run: ls -l ${{ github.workspace }}
+
       - name: Terraform Init
         run: terraform init
         working-directory: ${{ github.workspace }}/${{ inputs.workload }}
