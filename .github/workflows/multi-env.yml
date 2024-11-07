@@ -46,7 +46,7 @@ jobs:
         working-directory: ./Workload/${{ inputs.Workload }}
 
       - name: Terraform Plan
-        run: terraform plan -out=terraform.tfplan -var-file=./Deployment/${{ inputs.environment }}/${{ inputs.tfvars }}
+        run: terraform plan -out=terraform.tfplan -var-file=orica-test/Deployment/${{ inputs.environment }}/${{ inputs.tfvars }}
         working-directory: ./Workload/${{ inputs.Workload }}
 
       - name: Upload Terraform Plan
