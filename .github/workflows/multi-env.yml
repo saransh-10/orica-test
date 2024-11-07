@@ -53,7 +53,7 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -out=terraform.tfplan -var-file=${{ github.workspace }}/${{ inputs.var-file }}
-        working-directory: ./${{ inputs.workload }}
+        working-directory: ${{ github.workspace }}/${{ inputs.workload }}
 
       - name: Upload Terraform Plan
         id: upload_plan
