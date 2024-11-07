@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment to deploy to'
+        description: 'Environment for plan'
         required: true
         default: 'dev'
         type: choice
@@ -12,6 +12,17 @@ on:
           - uat
           - prod
           - transit
+      
+      release-environment:
+        description: 'Environment for plan'
+        required: true
+        type: choice
+        options:
+          - release-dev
+          - release-uat
+          - release-prod
+          - release-transit
+        
       var-file:
        required: true
        type: string
