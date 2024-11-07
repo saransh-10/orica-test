@@ -12,7 +12,7 @@ on:
           - uat
           - prod
           - transit
-      tfvars:
+      var-file:
        required: true
        type: string
       workload:
@@ -43,14 +43,14 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./Workload/${{ inputs.Workload }}
+        working-directory: ./${{ inputs.workload }}
 
       - name: List tfvars files
         run: ls -l ${{ github.workspace }}
 
       - name: Terraform Plan
-        run: terraform plan -out=terraform.tfplan -var-file=${{ github.workspace }}/Deployment/${{ inputs.environment }}/${{ inputs.tfvars }}
-        working-directory: ./Workload/${{ inputs.Workload }}
+        run: terraform plan -out=terraform.tfplan -var-file=${{ github.workspace }}/${{ inputs.var-file }}
+        working-directory: ./${{ inputs.workload }}
 
       - name: Upload Terraform Plan
         id: upload_plan
