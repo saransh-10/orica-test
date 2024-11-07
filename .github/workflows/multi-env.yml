@@ -11,6 +11,7 @@ on:
           - dev
           - uat
           - prod
+          - transit
       tfvars:
        required: true
        type: string
