@@ -43,7 +43,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: /${{ inputs.workload }}
+        working-directory: ${{ github.workspace }}/${{ inputs.workload }}
 
       - name: List tfvars files
         run: ls -l ${{ github.workspace }}
