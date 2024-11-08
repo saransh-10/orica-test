@@ -23,7 +23,6 @@ on:
           - release-transit
         
       tfvars:
-       description: 'variable file'
        required: true
        type: choice
        options:
@@ -34,7 +33,6 @@ on:
          - acc.tfvars
       
       workload:
-       description: 'variable file'
        required: true
        type: choice
        options:
